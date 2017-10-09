@@ -84,7 +84,7 @@ public interface ImageDownloader {
 			if (!belongsTo(uri)) {
 				throw new IllegalArgumentException(String.format("URI [%1$s] doesn't have expected scheme [%2$s]", uri, scheme));
 			}
-			return uri.substring(uriPrefix.length());
+   			return uri.substring(uriPrefix.length());
 		}
 	}
 }

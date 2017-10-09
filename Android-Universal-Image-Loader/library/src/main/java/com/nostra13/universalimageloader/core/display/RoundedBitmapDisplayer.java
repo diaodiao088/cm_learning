@@ -88,13 +88,12 @@ public class RoundedBitmapDisplayer implements BitmapDisplayer {
 		@Override
 		protected void onBoundsChange(Rect bounds) {
 			super.onBoundsChange(bounds);
-			mRect.set(margin, margin, bounds.width() - margin, bounds.height() - margin);
+				mRect.set(margin, margin, bounds.width() - margin, bounds.height() - margin);
 			
 			// Resize the original bitmap to fit the new bound
 			Matrix shaderMatrix = new Matrix();
 			shaderMatrix.setRectToRect(mBitmapRect, mRect, Matrix.ScaleToFit.FILL);
 			bitmapShader.setLocalMatrix(shaderMatrix);
-			
 		}
 
 		@Override

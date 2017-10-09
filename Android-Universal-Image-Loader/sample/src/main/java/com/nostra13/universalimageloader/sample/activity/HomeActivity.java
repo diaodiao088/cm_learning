@@ -15,12 +15,20 @@
  *******************************************************************************/
 package com.nostra13.universalimageloader.sample.activity;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.sample.Constants;
 import com.nostra13.universalimageloader.sample.R;
@@ -28,6 +36,7 @@ import com.nostra13.universalimageloader.sample.fragment.ImageGalleryFragment;
 import com.nostra13.universalimageloader.sample.fragment.ImageGridFragment;
 import com.nostra13.universalimageloader.sample.fragment.ImageListFragment;
 import com.nostra13.universalimageloader.sample.fragment.ImagePagerFragment;
+import com.nostra13.universalimageloader.sample.widget.CircleDrawable;
 import com.nostra13.universalimageloader.utils.L;
 
 import java.io.File;
@@ -42,16 +51,71 @@ public class HomeActivity extends Activity {
 
 	private static final String TEST_FILE_NAME = "Universal Image Loader @#&=+-_.,!()~'%20.png";
 
+	ImageView mIv;
+
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_home);
+
+		testNewThread();
 
 		File testImageOnSdCard = new File("/mnt/sdcard", TEST_FILE_NAME);
 		if (!testImageOnSdCard.exists()) {
 			copyTestImageToSdCard(testImageOnSdCard);
 		}
 	}
+
+	private Object waitObject = new Object();
+
+	private void testNewThread(){
+
+		Log.d("zd","testNewThread");
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+
+				if (doWait()){
+					Log.d("zd","after wait");
+				}
+			}
+		}).start();
+
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				synchronized (waitObject){
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					waitObject.notifyAll();
+				}
+			}
+		}).start();
+	}
+
+	private boolean doWait(){
+
+		synchronized (waitObject){
+			try {
+				waitObject.wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return true;
+	}
+
+
+
+
+
 
 	public void onImageListClick(View view) {
 		Intent intent = new Intent(this, SimpleImageActivity.class);

@@ -28,6 +28,7 @@ import com.nostra13.universalimageloader.core.download.ImageDownloader;
 /**
  * Contains needed information for decoding image to Bitmap
  *
+ *
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
  * @since 1.8.3
  */

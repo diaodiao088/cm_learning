@@ -292,7 +292,7 @@ public class ImageLoader {
 			ImageLoadingInfo imageLoadingInfo = new ImageLoadingInfo(uri, imageAware, targetSize, memoryCacheKey,
 					options, listener, progressListener, engine.getLockForUri(uri));
 			LoadAndDisplayImageTask displayTask = new LoadAndDisplayImageTask(engine, imageLoadingInfo,
-					defineHandler(options));
+						defineHandler(options));
 			if (options.isSyncLoading()) {
 				displayTask.run();
 			} else {
@@ -308,7 +308,7 @@ public class ImageLoader {
 	 * <b>NOTE:</b> {@link #init(ImageLoaderConfiguration)} method must be called before this method call
 	 *
 	 * @param uri       Image URI (i.e. "http://site.com/image.png", "file:///mnt/sdcard/image.png")
-	 * @param imageView {@link ImageView} which should display image
+	 * @param imageView {@link ImageView} which  display image
 	 * @throws IllegalStateException    if {@link #init(ImageLoaderConfiguration)} method wasn't called before
 	 * @throws IllegalArgumentException if passed <b>imageView</b> is null
 	 */

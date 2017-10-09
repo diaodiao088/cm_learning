@@ -562,6 +562,7 @@ public final class ImageLoaderConfiguration {
 
 		private void initEmptyFieldsWithDefaultValues() {
 			if (taskExecutor == null) {
+				// 类似 fixed thread pool
 				taskExecutor = DefaultConfigurationFactory
 						.createExecutor(threadPoolSize, threadPriority, tasksProcessingType);
 			} else {
