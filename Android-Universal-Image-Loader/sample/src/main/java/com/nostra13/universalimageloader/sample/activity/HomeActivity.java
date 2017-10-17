@@ -62,10 +62,10 @@ public class HomeActivity extends Activity {
 
 		testNewThread();
 
-		File testImageOnSdCard = new File("/mnt/sdcard", TEST_FILE_NAME);
+		/*File testImageOnSdCard = new File("/mnt/sdcard", TEST_FILE_NAME);
 		if (!testImageOnSdCard.exists()) {
 			copyTestImageToSdCard(testImageOnSdCard);
-		}
+		}*/
 	}
 
 	private Object waitObject = new Object();
@@ -79,6 +79,7 @@ public class HomeActivity extends Activity {
 			public void run() {
 
 				if (doWait()){
+					Log.d("zd","reset test");
 					Log.d("zd","after wait");
 				}
 			}
@@ -148,6 +149,7 @@ public class HomeActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
+		super.onBackPressed();
 		ImageLoader.getInstance().stop();
 		super.onBackPressed();
 	}

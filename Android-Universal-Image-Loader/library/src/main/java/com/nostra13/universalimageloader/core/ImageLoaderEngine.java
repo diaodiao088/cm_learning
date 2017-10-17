@@ -203,6 +203,7 @@ class ImageLoaderEngine {
 		return paused;
 	}
 
+
 	Object getPauseLock() {
 		return pauseLock;
 	}
